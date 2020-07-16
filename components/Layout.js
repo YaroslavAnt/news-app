@@ -4,6 +4,7 @@ import Head from "next/head";
 import Footer from "./Footer";
 import { useRouter } from "next/router";
 import { ButtonGroup, Button } from "@material-ui/core";
+import Navigation from "./Navigation";
 
 const Layout = ({ children, store }) => {
   const { categories } = store;
@@ -17,31 +18,7 @@ const Layout = ({ children, store }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <aside>
-        <nav>
-          <ButtonGroup
-            orientation="vertical"
-            color="primary"
-            aria-label="large vertical contained primary button group"
-            variant="text"
-          >
-            <Button variant={!category && "contained"} size="large">
-              <Link href="/">
-                <a>general</a>
-              </Link>
-            </Button>
-            {categories.map((categoryName) => (
-              <Button
-                size="large"
-                variant={categoryName === category && "contained"}
-                key={categoryName}
-              >
-                <Link href="/[category]" as={`/${categoryName}`}>
-                  <a>{categoryName}</a>
-                </Link>
-              </Button>
-            ))}
-          </ButtonGroup>
-        </nav>
+        <Navigation categories={categories} category={category} />
       </aside>
 
       <main>{children}</main>
@@ -68,20 +45,9 @@ const Layout = ({ children, store }) => {
           justify-content: center;
         }
 
-        nav {
-          position: fixed;
-          top: 25%;
-        }
-
         main {
           padding: 5rem 0;
           flex: 1;
-        }
-
-        a {
-          color: inherit;
-          text-decoration: none;
-          width: 100%;
         }
 
         .title span {
