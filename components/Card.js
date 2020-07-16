@@ -30,40 +30,35 @@ const MyCard = ({ article }) => {
 
   return (
     <Card className={classes.root}>
-      <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image={urlToImage ?? ""}
-          title="Contemplative Reptile"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {title}
-          </Typography>
-          <Typography
-            gutterBottom
-            variant="body2"
-            color="textSecondary"
-            component="p"
-          >
-            {description}
-          </Typography>
-          <Typography variant="body2" color="textPrimary" component="p">
-            {source.name}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-
-      <CardActions>
-        <Button size="small" color="primary">
-          <Link
-            href="/[category]/[slug]"
-            as={`/${category ?? "general"}/${getSlug(url)}`}
-          >
-            <a>Learn More</a>
-          </Link>
-        </Button>
-      </CardActions>
+      <Link
+        href="/[category]/[slug]"
+        as={`/${category ?? "general"}/${getSlug(url)}`}
+      >
+        <CardActionArea>
+          <CardMedia
+            className={classes.media}
+            image={urlToImage ?? ""}
+            title={title}
+            component="div"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+              {title}
+            </Typography>
+            <Typography
+              gutterBottom
+              variant="body2"
+              color="textSecondary"
+              component="p"
+            >
+              {description}
+            </Typography>
+            <Typography variant="body2" color="textPrimary" component="p">
+              {source.name}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Link>
     </Card>
   );
 };

@@ -3,56 +3,36 @@ import Layout from "../../components/Layout";
 import { inject, observer } from "mobx-react";
 import "mobx-react-lite/batchingForReactDom";
 import { useRouter } from "next/router";
+import { makeStyles } from "@material-ui/core/styles";
 
-function Category({ store }) {
-  const { articles } = store;
+const useStyles = makeStyles({
+  title: {
+    margin: 0,
+    lineHeight: 1.15,
+    fontSize: "4rem",
+    textAlign: "center",
+  },
+  blue: {
+    color: "#0070f3",
+  },
+  description: {
+    textAlign: "center",
+    lineHeight: 1.5,
+    fontSize: "1.5rem",
+  },
+});
+
+function Category({ articles }) {
   const router = useRouter();
   const { category } = router.query;
+  const classes = useStyles();
   return (
     <Layout>
-      <h1 className="title">
-        News to category <span>{category}</span>
+      <h1 className={classes.title}>
+        News to category <span className={classes.blue}>{category}</span>
       </h1>
-      <p className="description">Choose category of news</p>
+      <p className={classes.description}>Choose category of news</p>
       <ArticleList articles={articles} />
-
-      <style jsx>{`
-        .title span {
-          color: #0070f3;
-          text-decoration: none;
-        }
-
-        .title {
-          margin: 0;
-          line-height: 1.15;
-          font-size: 4rem;
-        }
-
-        .title,
-        .description {
-          text-align: center;
-        }
-
-        .description {
-          line-height: 1.5;
-          font-size: 1.5rem;
-        }
-      `}</style>
-
-      <style jsx global>{`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-
-        * {
-          box-sizing: border-box;
-        }
-      `}</style>
     </Layout>
   );
 }

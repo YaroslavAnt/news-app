@@ -1,7 +1,7 @@
 import { inject, observer } from "mobx-react";
 import { useRouter } from "next/router";
 import Layout from "../../components/Layout";
-import { Typography, Button } from "@material-ui/core";
+import { Typography, Button, Box } from "@material-ui/core";
 import Link from "next/link";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -21,7 +21,6 @@ const ArticleItem = ({ store }) => {
   const { slug, category } = router.query;
   const article = articles.find((article) => article.url.includes(slug)) || {};
   const { urlToImage, url, title, content, author, publishedAt } = article;
-  // const [date] = publishedAt.split("T");
 
   return (
     <Layout>
@@ -36,19 +35,20 @@ const ArticleItem = ({ store }) => {
       <Typography align="right" gutterBottom color="primary">
         {author}
       </Typography>
-      <a href={url} target="_blank">
-        Original text
-      </a>
-      <Button size="small" color="primary">
-        <Link
-          href={category === "general" ? "/" : "/[category]"}
-          as={category === "general" ? "/" : `/${category}`}
-        >
-          <a>Back to list</a>
-        </Link>
-      </Button>
-
-      {/* <pre>{JSON.stringify(article, null, 2)}</pre> */}
+      <Box mb={3}>
+        <a href={url} target="_blank">
+          Original text
+        </a>
+      </Box>
+      <br />
+      <Link
+        href={category === "general" ? "/" : "/[category]"}
+        as={category === "general" ? "/" : `/${category}`}
+      >
+        <Button size="small" color="secondary" variant="contained">
+          Back to list
+        </Button>
+      </Link>
     </Layout>
   );
 };

@@ -81,6 +81,7 @@ const Layout = ({ children, store }) => {
         a {
           color: inherit;
           text-decoration: none;
+          width: 100%;
         }
 
         .title span {
