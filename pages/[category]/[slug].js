@@ -4,6 +4,7 @@ import Layout from "../../components/Layout";
 import { Typography, Button, Box } from "@material-ui/core";
 import Link from "next/link";
 import { makeStyles } from "@material-ui/core/styles";
+import "mobx-react-lite/batchingForReactDom";
 
 const useStyles = makeStyles({
   image: {
